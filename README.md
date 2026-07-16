@@ -60,7 +60,7 @@ CREATE TABLE netflix(
 
 ## 🔍 Business Problems Solved
 
-## 1. Count the number of Movies vs TV Shows
+### 1. Count the number of Movies vs TV Shows
 
 ```sql
 SELECT 
@@ -69,7 +69,25 @@ SELECT
 FROM netflix
 GROUP BY 1;
 ```
-2. Find the most common rating for Movies and TV Shows
+### 2. Find the most common rating for Movies and TV Shows
+
+```sql
+SELECT 
+	type, 
+	rating
+FROM (
+	SELECT 
+		type,
+		rating, 
+		COUNT(*),
+		RANK() OVER(PARTITION BY type 
+		ORDER BY COUNT(*) DESC) AS rnk
+	FROM netflix
+	GROUP BY 1,2
+	ORDER BY 1,3 DESC
+)
+WHERE rnk=1;
+```
 3. List all movies released in a specific year (e.g., 2020)
 4. Find the top 5 countries with the most content on Netflix
 5. Identify the longest movie
