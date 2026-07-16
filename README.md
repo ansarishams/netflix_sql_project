@@ -60,7 +60,15 @@ CREATE TABLE netflix(
 
 ## 🔍 Business Problems Solved
 
-1. Count the number of Movies vs TV Shows
+## 1. Count the number of Movies vs TV Shows
+
+```sql
+SELECT 
+	type, 
+	COUNT(*)
+FROM netflix
+GROUP BY 1;
+```
 2. Find the most common rating for Movies and TV Shows
 3. List all movies released in a specific year (e.g., 2020)
 4. Find the top 5 countries with the most content on Netflix
